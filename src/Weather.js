@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import FormattedDate from "./FormattedDate";
 import "./Weather.css";
 import axios from "axios";
 
@@ -11,7 +12,7 @@ export default function Weather (props) {
             ready: true,
             temperature: response.data.main.temp,
             description: response.data.weather[0].description,
-            date: "Wednesday 7:00",
+            date: new Date(response.data.dt*1000),
             iconUrl: "http://assets.msn.com/bundles/v1/weather/latest/PartlyCloudyDayV3.svg",
             wind: response.data.wind.speed,
             humidity: response.data.main.humidity,
@@ -35,7 +36,7 @@ export default function Weather (props) {
             <h1>{weatherData.city}</h1>
             <ul>
                 <li>
-                   {weatherData.date}
+                   <FormattedDate date={weatherData.date}/>
                 </li>
                 <li className="text-capitalize">
                    {weatherData.description}
